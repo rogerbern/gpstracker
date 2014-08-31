@@ -2,7 +2,7 @@
 <resources>
 
     <string name="app_name">GPS Tracker</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="hello_world">Marc war hier!</string>
     <string name="action_settings">Settings</string>
 
 </resources>
