@@ -9,8 +9,23 @@
     tools:context="ch.ffhs.esa.arm.gpstracker.MainActivity" >
 
     <TextView
+        android:id="@+id/urgency_settings_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="64dp"
+        android:gravity="center_vertical|center_horizontal"
+        android:text="@string/urgencySettingsText" />
+
+    <Button
+        android:id="@+id/urgency_call_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="100dp"
+        android:onClick="urgencyCall"
+        android:text="@string/urgencyCall" />
 
 </RelativeLayout>

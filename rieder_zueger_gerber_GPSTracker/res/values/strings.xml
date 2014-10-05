@@ -2,7 +2,51 @@
 <resources>
 
     <string name="app_name">GPS Tracker</string>
-    <string name="hello_world">Marc war hier!</string>
     <string name="action_settings">Settings</string>
+    <string name="action_home">Home</string>
+    <string name="action_tracking_start">Start Tracking</string>
+    <string name="action_tracking_pause">Pause Tracking</string>
+    <string name="action_tracking_stop">Stop Tracking</string>
+    <string name="action_tracking_add">New Tracking</string>
+    <string name="action_map">View Map</string>
+    <string name="action_tracking_list">View Tracking list</string>
+    <string name="action_tracking_prefs">View Tracking Settings</string>
+    <string name="action_help">Help</string>
+    <string name="action_lock">Lock</string>
+    <string name="preferences">Preferences</string>
+    
+    <string name="urgencySettingsText">Please configure the urgency settings in the settings dialog.</string>
+    <string name="urgencyCall">Call Help</string>
+    
+    <string name="tracking_new">New Tracking</string>
+    <string name="editText_tracking_name">Tracking Name</string>
+    <string name="tracking_intervall">Tracking Intervall</string>
+    <string name="sms_receivers">SMS Receivers</string>
+    <string name="tracking_sms_receiver_1_title"></string>
+    <string name="tracking_sms_receiver_2_title"></string>
+    <string name="tracking_sms_receiver_3_title"></string>
+    <string name="tracking_notificatin_activate">Activate Notification</string>
+    <string name="saveButtonText">Save</string>
+    
+    
+    <string name="pref_urgency_settings_title">Urgency Settings</string>
+    <string name="pref_urgency_phonecall_receiver_title">Phonecall Receiver</string>
+    <string name="pref_urgency_sms_receiver1_title">GPS sms notification receiver 1</string>
+    <string name="pref_urgency_sms_receiver2_title">GPS sms notification receiver 2</string>
+    <string name="pref_urgency_sms_receiver3_title">GPS sms notification receiver 3</string>
+    <string name="pref_tracking_settings_title">Tracking Settings</string>
+    <string name="pref_tracking_name_title">Name</string>
+    <string name="pref_gps_intervall_title">Intervall</string>
+    <string name="pref_tracking_sms_receiver1_title">GPS sms notification receiver 1</string>
+    <string name="pref_tracking_sms_receiver2_title">GPS sms notification receiver 2</string>
+    <string name="pref_tracking_sms_receiver3_title">GPS sms notification receiver 3</string>
+    <string name="pref_tracking_activate_notification_summary">Sends SMS to notification receifers in the chosen intervall.</string>
+    <string name="pref_tracking_activate_notification_title">Activate Notification</string>
+    <string name="pref_lock_settings">Screen lock Setting</string>
+    <string name="pref_lock_settings_summary">When you set a password for the lock function, you can lock the menu with the corresponding menu entry (Lock). Only the "Call help" button remains active. To unlock the menu, click on the lock symbol in the menu bar and enter your password which you define here.</string>
+    <string name="pref_title_lock_pwd">Lock Password</string>
+    <string name="pref_title_lock_pwd_retype">Retype Lock Password</string>
+    
+    <string name="help_Introduction_text">Hier steht später mal was hilfreiches.</string>
 
 </resources>
