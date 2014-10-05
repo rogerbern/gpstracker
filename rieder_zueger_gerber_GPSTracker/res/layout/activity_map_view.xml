@@ -9,8 +9,13 @@
     tools:context="ch.ffhs.esa.arm.gpstracker.MapViewActivity" >
 
     <TextView
+        android:id="@+id/map_view_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="MapView" />
-    
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="64dp"
+        android:gravity="center_vertical|center_horizontal"
+        android:text="@string/action_map" />
+
 </RelativeLayout>

@@ -29,11 +29,11 @@ public class TrackingListActivity extends BaseActivity {
         setContentView(R.layout.activity_tracking_list);
         
         tl = (TableLayout) findViewById(R.id.tracking_table_tl);
-        addHeaders(tl);
-        addData(tl);
+        addHeaders();
+        addData();
     }
 	
-	private void addHeaders(TableLayout tl) {
+	private void addHeaders() {
 		tr = new TableRow(this);
 		tr.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT));
 		tr.addView(configureHeaderCell(TRACKING_TITLE));
@@ -65,7 +65,7 @@ public class TrackingListActivity extends BaseActivity {
 		return tw;
 	}
 	
-	private void addData(TableLayout tl) {
+	private void addData() {
 		for (String element : trackingNames) {
 			TableRow tr = new TableRow(this);
 			tr.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT));
