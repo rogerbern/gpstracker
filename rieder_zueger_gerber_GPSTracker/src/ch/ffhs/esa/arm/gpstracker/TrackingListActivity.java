@@ -33,6 +33,11 @@ public class TrackingListActivity extends BaseActivity {
         addData();
     }
 	
+	@Override
+	protected void onResume() {
+	  // TODO: laden der Trackingdaten aus der Datenbank und darstellung in einer ListView
+	}
+	
 	private void addHeaders() {
 		tr = new TableRow(this);
 		tr.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT));

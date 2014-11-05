@@ -1,6 +1,7 @@
 package ch.ffhs.esa.arm.gpstracker;
 
-
+import ch.ffhs.esa.arm.gpstracker.services.MessengerServiceConnector;
+import ch.ffhs.esa.arm.gpstracker.services.TrackingCallerIntentService;
 import android.app.Activity;
 import android.content.Intent;
 import android.view.Menu;
@@ -31,7 +32,6 @@ public class Navigation {
   
   // Singleton, so only private constructor
   private Navigation() {
-	  
   }
   
   /**
@@ -83,14 +83,19 @@ public class Navigation {
 		  actionMainIntend(activity);
 		  return true;
         case R.id.action_tracking_start:
-          setTrackingPlay(true);         
+          setTrackingPlay(true);
+          // messageIntent(activity, TrackingCallerIntentService.TRACKING_START);
+          new MessengerServiceConnector(activity).bindService();
           return true;
         case R.id.action_tracking_pause:
           setTrackingPlay(false);
+          //messageIntent(activity, TrackingCallerIntentService.TRACKING_PAUSE);
+          new MessengerServiceConnector(activity).bindService();
           return true;
         case R.id.action_tracking_stop:
           setTrackingPlay(false);
           setTrackingActive(false);
+          messageIntent(activity, TrackingCallerIntentService.TRACKING_STOP);
           return true;
         case R.id.action_tracking_add:
           actionNewIntend(activity);
@@ -107,9 +112,20 @@ public class Navigation {
         case R.id.action_help:
         	actionHelpIntend(activity);
         	return true;
+        case R.id.action_lock:
+        	// TODO: Remove all Icons form the Navigationbar. And add the Lockicon
+        	// TODO: Set the preference locked
+        	// TODO: on all Activities (put in BaseActivity and do not forget the PreferenceActivity)
+        	// onResume() determine if lock is set, if so redirect to the MainActivity
         default:
           return false;
     }
+  }
+  
+  private void messageIntent(Activity activity, String value) {
+    Intent msgIntent = new Intent(activity, TrackingCallerIntentService.class);
+    msgIntent.putExtra(TrackingCallerIntentService.TRACKING_CALLER_MESSAGE_NAME, value);
+    activity.startService(msgIntent);
   }
   
   /**
@@ -197,7 +213,7 @@ public class Navigation {
    */
   private void processLock() {
 	  if (lockActive) {
-		processActiveLock();  
+		processActiveLock();
 	  } else {
 		  processInactiveLock();
 	  }

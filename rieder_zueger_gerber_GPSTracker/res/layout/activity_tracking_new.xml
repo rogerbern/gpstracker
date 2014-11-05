@@ -22,7 +22,8 @@
         android:layout_below="@+id/tracking_new"
         android:layout_marginTop="15dp"
         android:inputType="text"
-        android:text="@string/editText_tracking_name" />
+        android:hint="@string/editText_tracking_name"
+        android:text="" />
 
     <TextView
         android:id="@+id/tracking_intervall"

@@ -34,4 +34,19 @@ public class BaseActivity extends Activity {
     	// Handle presses on the action bar items
         return Navigation.getInstance().onOptionsItemSelected(item, this);
     }
+    
+    @Override
+    protected void onStart() {
+    	super.onStart();
+    }
+    
+    @Override
+    protected void onStop() {
+    	super.onStop();
+    }
+    
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
 }
