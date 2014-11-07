@@ -1,4 +1,4 @@
-package ch.ffhs.esa.arm.gpstracker;
+package ch.ffhs.esa.arm.gpstracker.utils;
 
 import java.util.Set;
 
@@ -26,14 +26,6 @@ public final class SMSSender extends Thread {
   public SMSSender(Set<String> phoneNumbers, MessageType messageType) {
 	this.phoneNumbers = phoneNumbers;
 	this.messageType = messageType;
-  }
-  
-  /**
-   * Sends SMS with the application password to the transmitted phonenumber.
-   * @param phoneNumber
-   */
-  public static void sendPasswordSMS(String phoneNumber) {
-    sendSMS(phoneNumber, MessageType.PASSWORD.getText());
   }
 
   public void run() {
@@ -66,7 +58,7 @@ public final class SMSSender extends Thread {
    * @param phoneNumber
    * @param messageText
    */
-  private static void sendSMS(String phoneNumber, String messageText) {
+  private void sendSMS(String phoneNumber, String messageText) {
 	  SmsManager smsManager = SmsManager.getDefault();
 	  smsManager.sendTextMessage(phoneNumber, null, messageText, null, null);
   }

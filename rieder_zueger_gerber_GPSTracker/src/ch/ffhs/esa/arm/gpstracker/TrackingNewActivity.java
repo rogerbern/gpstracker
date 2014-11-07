@@ -24,6 +24,10 @@ public class TrackingNewActivity extends BaseActivity {
 	
 	@Override
 	public void onResume() {
+	  super.onResume();
+	  // manipulate menu (do not show play, new, pause, stop, preferences)
+	  Navigation.getInstance(this).proecessNewTrackingActivityMenu();
+	  
 	  // load already stored preference values form the shared preferences and set them as
 	  // values in the input fields of the form
       SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
@@ -85,8 +89,8 @@ public class TrackingNewActivity extends BaseActivity {
 	  // commit the changes to persistence
 	  editor.commit();
 	  // initialize the navigation icons of the tracking controls
-	  Navigation.getInstance().setTrackingActive(true);
-	  Navigation.getInstance().setTrackingPlay(false);
-	  Navigation.getInstance().actionMainIntend(this);
+	  Navigation.getInstance(this).setTrackingActive(true);
+	  Navigation.getInstance(this).setTrackingPlay(false);
+	  Navigation.getInstance(this).actionMainIntend(this);
 	}
 }

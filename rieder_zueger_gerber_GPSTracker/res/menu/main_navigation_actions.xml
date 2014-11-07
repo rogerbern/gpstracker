@@ -27,6 +27,10 @@
 	      android:icon="@drawable/ic_action_secure"
 	      android:title="@string/action_lock"
 	      android:showAsAction="ifRoom"/>
+	<item android:id="@+id/action_unlock"
+	      android:icon="@drawable/ic_action_secure"
+	      android:title="@string/action_unlock"
+	      android:showAsAction="ifRoom"/>
 	<item android:id="@+id/action_settings"
           android:title="@string/preferences"
           android:showAsAction="never"/>

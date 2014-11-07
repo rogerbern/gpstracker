@@ -2,6 +2,12 @@ package ch.ffhs.esa.arm.gpstracker;
 
 import java.util.Set;
 
+import ch.ffhs.esa.arm.gpstracker.BaseActivity;
+import ch.ffhs.esa.arm.gpstracker.R;
+import ch.ffhs.esa.arm.gpstracker.utils.MessageType;
+import ch.ffhs.esa.arm.gpstracker.utils.PhoneNumberHelper;
+import ch.ffhs.esa.arm.gpstracker.utils.SMSSender;
+
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesClient;
 import com.google.android.gms.common.GooglePlayServicesClient.OnConnectionFailedListener;

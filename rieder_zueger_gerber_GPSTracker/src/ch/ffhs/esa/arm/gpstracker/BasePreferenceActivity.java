@@ -22,7 +22,7 @@ public class BasePreferenceActivity extends PreferenceActivity {
 	
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-    	Navigation.getInstance().calculateActionBar(menu);
+    	Navigation.getInstance(this).calculateActionBar(menu);
     	return super.onPrepareOptionsMenu(menu);
     }
 
@@ -32,6 +32,6 @@ public class BasePreferenceActivity extends PreferenceActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
     	// Handle presses on the action bar items
-        return Navigation.getInstance().onOptionsItemSelected(item, this);
+        return Navigation.getInstance(this).onOptionsItemSelected(item, this);
     }
 }

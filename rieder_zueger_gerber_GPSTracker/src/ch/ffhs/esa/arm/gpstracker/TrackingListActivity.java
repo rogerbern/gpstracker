@@ -36,6 +36,7 @@ public class TrackingListActivity extends BaseActivity {
 	
 	@Override
 	protected void onResume() {
+	  super.onResume();
 	  // TODO: laden der Trackingdaten aus der Datenbank und darstellung in einer ListView
 	}
 	

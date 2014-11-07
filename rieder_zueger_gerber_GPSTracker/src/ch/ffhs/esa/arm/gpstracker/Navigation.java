@@ -1,9 +1,10 @@
 package ch.ffhs.esa.arm.gpstracker;
 
-import ch.ffhs.esa.arm.gpstracker.services.MessengerServiceConnector;
-import ch.ffhs.esa.arm.gpstracker.services.TrackingCallerIntentService;
 import android.app.Activity;
+import android.app.Application;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -15,11 +16,15 @@ import android.view.MenuItem;
  * @author roger
  *
  */
-public class Navigation {
+public class Navigation extends Application {
+  private static final String TRACKING_ACTIVE_KEY = "pref_key_tracking_active";
+  private static final String TRACKING_PLAY_KEY = "pref_key_tracking_play";
+  private static final String LOCK_SETTINGS_KEY = "pref_key_lock_settings";
   private static Navigation instance = null;
-  private boolean trackingActive = false; // ToDo: read from stored state
-  private boolean trackingPlay = false; // ToDo: read from stored state
-  private boolean lockActive = false; // ToDo: read from stored state
+  private boolean trackingActive; // ToDo: read from stored state
+  private boolean trackingPlay; // ToDo: read from stored state
+  private boolean lockActive; // ToDo: read from stored state
+  private boolean initialized = false;
   private MenuItem menuItemTaskPlay;
   private MenuItem menuItemTaskPause;
   private MenuItem menuItemTaskStopp;
@@ -29,6 +34,8 @@ public class Navigation {
   private MenuItem menuItemUrgencySettings;
   private MenuItem menuItemHelp;
   private MenuItem menuItemLock;
+  private MenuItem menuItemUnlock;
+  private static Context context;
   
   // Singleton, so only private constructor
   private Navigation() {
@@ -39,9 +46,10 @@ public class Navigation {
    * Handles the ActionBar
    * @return
    */
-  public static Navigation getInstance() {
+  public static Navigation getInstance(Activity activity) {
 	  if (instance == null) {
 		  instance = new Navigation();
+		  context = activity;
 	  }
 	  return instance;
   }
@@ -51,8 +59,18 @@ public class Navigation {
    * @param menu
    */
   public void calculateActionBar(Menu menu) {
-	  initialize(menu);
+	  this.trackingActive = getBooleanPreferencesValue(TRACKING_ACTIVE_KEY);
+	  this.trackingPlay = getBooleanPreferencesValue(TRACKING_PLAY_KEY);
+	  if (!this.initialized) {
+	    initialize(menu);
+	  }
+	  if(!this.lockActive) {
+	    processInactiveLock();
+	  }
 	  processTracking();
+	  if (this.lockActive) {
+		processActiveLock();
+	  }
   }
   
   /**
@@ -60,7 +78,7 @@ public class Navigation {
    * @param menu
    */
   private void initialize(Menu menu) {
-    this.menuItemTaskPlay = menu.findItem(R.id.action_tracking_start);
+	this.menuItemTaskPlay = menu.findItem(R.id.action_tracking_start);
 	this.menuItemTaskPause = menu.findItem(R.id.action_tracking_pause);
 	this.menuItemTaskStopp = menu.findItem(R.id.action_tracking_stop);
 	this.menuItemTaskNew = menu.findItem(R.id.action_tracking_add);
@@ -69,6 +87,21 @@ public class Navigation {
 	this.menuItemUrgencySettings = menu.findItem(R.id.action_settings);
 	this.menuItemHelp = menu.findItem(R.id.action_help);
 	this.menuItemLock = menu.findItem(R.id.action_lock);
+	this.menuItemUnlock = menu.findItem(R.id.action_unlock);
+	this.initialized = true;
+  }
+  
+  private void setBooleanPreferencesValue(Activity activity, String key, boolean value) {
+	
+	SharedPreferences preferences = activity.getSharedPreferences(EditPreferences.SHARED_PREF_NAME, Context.MODE_MULTI_PROCESS);
+    SharedPreferences.Editor editor = preferences.edit();
+    editor.putBoolean(key, value);
+    editor.apply();
+  }
+  
+  private boolean getBooleanPreferencesValue(String key) {
+    SharedPreferences preferences = this.context.getSharedPreferences(EditPreferences.SHARED_PREF_NAME, Context.MODE_MULTI_PROCESS);
+    return preferences.getBoolean(key, false);
   }
   
   /**
@@ -83,21 +116,24 @@ public class Navigation {
 		  actionMainIntend(activity);
 		  return true;
         case R.id.action_tracking_start:
+          setBooleanPreferencesValue(activity, TRACKING_PLAY_KEY, true);
           setTrackingPlay(true);
-          // messageIntent(activity, TrackingCallerIntentService.TRACKING_START);
-          new MessengerServiceConnector(activity).bindService();
+          // TODO: write to settings
           return true;
         case R.id.action_tracking_pause:
+          setBooleanPreferencesValue(activity, TRACKING_PLAY_KEY, false);
           setTrackingPlay(false);
-          //messageIntent(activity, TrackingCallerIntentService.TRACKING_PAUSE);
-          new MessengerServiceConnector(activity).bindService();
+          // TODO: write to settings
           return true;
         case R.id.action_tracking_stop:
+          setBooleanPreferencesValue(activity, TRACKING_ACTIVE_KEY, false);
+          setBooleanPreferencesValue(activity, TRACKING_PLAY_KEY, false);
           setTrackingPlay(false);
           setTrackingActive(false);
-          messageIntent(activity, TrackingCallerIntentService.TRACKING_STOP);
+         // TODO: write to settings
           return true;
         case R.id.action_tracking_add:
+          setBooleanPreferencesValue(activity, TRACKING_ACTIVE_KEY, true);
           actionNewIntend(activity);
           return true;
         case R.id.action_map:
@@ -113,19 +149,18 @@ public class Navigation {
         	actionHelpIntend(activity);
         	return true;
         case R.id.action_lock:
-        	// TODO: Remove all Icons form the Navigationbar. And add the Lockicon
-        	// TODO: Set the preference locked
+        	// Set the preference locked
+        	setBooleanPreferencesValue(activity, LOCK_SETTINGS_KEY, true);
+        	actionLockIntend(activity);
+        	return true;
         	// TODO: on all Activities (put in BaseActivity and do not forget the PreferenceActivity)
         	// onResume() determine if lock is set, if so redirect to the MainActivity
+        case R.id.action_unlock:
+        	actionUnlockIntend(activity);
+        	return true;
         default:
           return false;
     }
-  }
-  
-  private void messageIntent(Activity activity, String value) {
-    Intent msgIntent = new Intent(activity, TrackingCallerIntentService.class);
-    msgIntent.putExtra(TrackingCallerIntentService.TRACKING_CALLER_MESSAGE_NAME, value);
-    activity.startService(msgIntent);
   }
   
   /**
@@ -135,6 +170,7 @@ public class Navigation {
    */
   private <T> void startActivity(Class<T> c, Activity activity) {
 	  Intent i = new Intent(activity, c);
+	  i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 	  activity.startActivity(i);
   }
   
@@ -160,6 +196,14 @@ public class Navigation {
   
   private void actionHelpIntend(Activity activity) {
 	startActivity(HelpActivity.class, activity);
+  }
+  
+  private void actionLockIntend(Activity activity) {
+	  startActivity(LockActivity.class, activity);
+  }
+  
+  private void actionUnlockIntend(Activity activity) {
+	  startActivity(UnlockActivity.class, activity);
   }
   
   /**
@@ -211,7 +255,7 @@ public class Navigation {
   /**
    * Helper method that checks lock state and calls appropriate processing method 
    */
-  private void processLock() {
+  public void processLock() {
 	  if (lockActive) {
 		processActiveLock();
 	  } else {
@@ -220,19 +264,26 @@ public class Navigation {
   }
   
   /**
+   * Creates the menu for the TrackingNewActivity
+   */
+  public void proecessNewTrackingActivityMenu() {
+	  alterVisibility(false, menuItemTaskPlay, menuItemTaskPause, menuItemTaskStopp, menuItemTaskNew, menuItemUrgencySettings);
+  }
+  
+  /**
    * Handles the active lock state
    */
   private void processActiveLock() {
-	  alterVisibility(false, menuItemTaskPlay, menuItemTaskPause, menuItemTaskStopp, menuItemTaskNew, menuItemMapView, menuItemTaskList, menuItemUrgencySettings);
-	  alterVisibility(true, menuItemLock, menuItemHelp);
+	  alterVisibility(false, menuItemTaskPlay, menuItemTaskPause, menuItemTaskStopp, menuItemTaskNew, menuItemMapView, menuItemTaskList, menuItemUrgencySettings, menuItemLock, menuItemHelp);
+	  alterVisibility(true, menuItemUnlock);
   }
   
   /**
    * Handles the inactive lock state
    */
   private void processInactiveLock() {
-	  alterVisibility(false, menuItemLock);
-	  alterVisibility(true, menuItemTaskPlay, menuItemTaskPause, menuItemTaskStopp, menuItemTaskNew, menuItemMapView, menuItemTaskList, menuItemUrgencySettings, menuItemHelp);
+	  alterVisibility(false, menuItemUnlock);
+	  alterVisibility(true, menuItemTaskPlay, menuItemTaskPause, menuItemTaskStopp, menuItemTaskNew, menuItemMapView, menuItemTaskList, menuItemUrgencySettings, menuItemLock, menuItemHelp);
   }
   
   /**

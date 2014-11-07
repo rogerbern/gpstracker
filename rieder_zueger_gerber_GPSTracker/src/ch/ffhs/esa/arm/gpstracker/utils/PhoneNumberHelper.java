@@ -1,7 +1,9 @@
-package ch.ffhs.esa.arm.gpstracker;
+package ch.ffhs.esa.arm.gpstracker.utils;
 
 import java.util.HashSet;
 import java.util.Set;
+
+import ch.ffhs.esa.arm.gpstracker.EditPreferences;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -20,9 +22,9 @@ public class PhoneNumberHelper {
   public static String TRACKING_SMS_RECEIVER_ONE = "pref_key_tracking_sms_receiver1";
   public static String TRACKING_SMS_RECEIVER_TWO = "pref_key_tracking_sms_receiver2";
   public static String TRACKING_SMS_RECEIVER_THREE = "pref_key_tracking_sms_receiver3";
-  private PhoneNumberHelper() {}
   private static SharedPreferences preferences;
   
+  private PhoneNumberHelper() {}
   /**
    * Returns the phone number for urgency call stored in app preferences as a string.
    * If the stored value is empty this method returns an empty string.

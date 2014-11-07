@@ -1,4 +1,4 @@
-package ch.ffhs.esa.arm.gpstracker;
+package ch.ffhs.esa.arm.gpstracker.utils;
 
 import java.util.List;
 

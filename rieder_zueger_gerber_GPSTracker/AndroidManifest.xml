@@ -22,7 +22,8 @@
         <!-- <uses-library android:name="com.google.android.maps"/> -->	
         <activity
             android:name=".MainActivity"
-            android:label="" >
+            android:label="Urgency Call" 
+            android:launchMode="singleInstance">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -30,42 +31,43 @@
         </activity>
         <activity
             android:name=".TrackingListActivity"
-            android:label="Tracking List" >
+            android:label="Tracking List" 
+            android:launchMode="singleInstance">
         </activity>
         <activity
             android:name=".TrackingNewActivity"
-            android:label="New Tracking" >
+            android:label="New Tracking" 
+            android:launchMode="singleInstance">
         </activity>
         <activity
             android:name=".MapViewActivity"
-            android:label="MapView" >
+            android:label="MapView"
+            android:launchMode="singleInstance">
         </activity>
         <activity 
             android:name=".EditPreferences"
-            android:label="Preferences">
+            android:label="Preferences"
+            android:launchMode="singleInstance">
         </activity>
         <activity 
             android:name=".HelpActivity"
-            android:label="Help">
+            android:label="Help"
+            android:launchMode="singleInstance">
         </activity>   
+        <activity 
+            android:name=".LockActivity"
+            android:label="Lock"
+            android:launchMode="singleInstance">
+        </activity>
+        <activity 
+            android:name=".UnlockActivity"
+            android:label="Unlock"
+            android:launchMode="singleInstance">
+        </activity>
         
        <service 
            android:name=".services.GeoPositionServiceRemote"
            android:process=":GeoPositionServiceRemote">
-       </service>
-       
-       <service
-           android:name=".services.TrackingCallerIntentService">
-       </service>
-       
-       <service
-           android:name=".services.MessengerService"
-           android:enabled="true"
-           android:exported="true"
-           android:process=":MessengerService">
-            <intent-filter>
-                <action android:name="ch.ffhs.esa.arm.gpstracker.messengerservice.ACTION_BIND"/>
-            </intent-filter>
        </service>
        
        <receiver android:name=".services.MessengerServiceAutostart">

@@ -2,6 +2,8 @@ package ch.ffhs.esa.arm.gpstracker;
 
 import java.util.ArrayList;
 
+import ch.ffhs.esa.arm.gpstracker.utils.LocationHelper;
+
 import android.location.Location;
 import android.os.Bundle;
 
@@ -26,6 +28,7 @@ public class MapViewActivity extends BaseActivity {
 	
 	@Override
 	protected void onResume() {
+		super.onResume();
 		ArrayList<Location> locationList = new ArrayList<Location>();
 		// determine if a tracking id was transmitted on item start
 		// TODO: case if no tracking id was submitted, but a tracking is currently active -> show it (load route from db)

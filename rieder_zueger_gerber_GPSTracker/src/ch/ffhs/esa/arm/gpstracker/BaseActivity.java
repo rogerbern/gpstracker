@@ -14,7 +14,6 @@ public class BaseActivity extends Activity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main_navigation_actions, menu);
-        // Navigation.getInstance().calculateActionBar(menu);
         onPrepareOptionsMenu(menu);
         getActionBar().setHomeButtonEnabled(true);
         return super.onCreateOptionsMenu(menu);
@@ -22,7 +21,7 @@ public class BaseActivity extends Activity {
 	
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-    	Navigation.getInstance().calculateActionBar(menu);
+    	Navigation.getInstance(this).calculateActionBar(menu);
     	return super.onPrepareOptionsMenu(menu);
     }
 
@@ -32,7 +31,7 @@ public class BaseActivity extends Activity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
     	// Handle presses on the action bar items
-        return Navigation.getInstance().onOptionsItemSelected(item, this);
+        return Navigation.getInstance(this).onOptionsItemSelected(item, this);
     }
     
     @Override

@@ -13,6 +13,7 @@
     <string name="action_tracking_prefs">View Tracking Settings</string>
     <string name="action_help">Help</string>
     <string name="action_lock">Lock</string>
+    <string name="action_unlock">Unlock</string>
     <string name="preferences">Preferences</string>
     
     <string name="urgencySettingsText">Please configure the urgency settings in the settings dialog.</string>
@@ -48,5 +49,11 @@
     <string name="pref_title_lock_pwd_retype">Retype Lock Password</string>
     
     <string name="help_Introduction_text">Hier steht später mal was hilfreiches.</string>
+    
+    <string name="lock_Introduction_text">Bitte setzten Sie erst das Passwort zum entsperren in den Einstellungen.</string>
+    
+    <string name="unlock_Introduction_text">Bitte geben Sie das Passwort zum entsperren ein.</string>
+    <string name="unlock_password_label">Passwort</string>
+    <string name="unlock_error_text">Das eingegebene Passwort ist nicht korrekt.</string>
 
 </resources>

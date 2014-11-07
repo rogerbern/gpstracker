@@ -1,4 +1,4 @@
-package ch.ffhs.esa.arm.gpstracker;
+package ch.ffhs.esa.arm.gpstracker.utils;
 
 /**
  * Enumeration for the message type of an position sms with text representation for sms text

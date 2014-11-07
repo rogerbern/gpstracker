@@ -79,49 +79,10 @@ public class GeoPositionServiceRemote extends Service {
 		// TODO: stop tracking
 		// TODO: Log event (there is a problem, if a tracking is actives)
 	}
-	
-	@Override
-	public IBinder onBind(Intent arg0) {
-		return gpsBinder;
-	}
-	
-	private final IGeoPositionServiceRemote.Stub gpsBinder = new IGeoPositionServiceRemote.Stub() {
-		@Override
-		public String stop() throws RemoteException {
-			setStopped(true);
-			return "stopped";
-		}
-		
-		@Override
-		public String start() throws RemoteException {
-			setStarted(true);
-			return "started";
-		}
-		
-		@Override
-		public String pause() throws RemoteException {
-			setStarted(false);
-			return "paused";
-		}
-		
-		@Override
-		public String configChanged() throws RemoteException {
-			// check the preferences for tracking relevant information
-			preferences = getSharedPreferences(EditPreferences.SHARED_PREF_NAME, Context.MODE_MULTI_PROCESS);
-		    String intervall = preferences.getString("pref_key_gps_intervall", DEFAULT_VALUE);
-		    if (!intervall.equals(DEFAULT_VALUE)) {
-		    	if(!intervall.equals(getIntervall())) {
-		    		setIntervall(intervall);
-		    	}
-		    }
-		    Boolean notification = preferences.getBoolean("pref_key_tracking_activate_notification", false);
-			if (notification != null) {
-				if(notification != getNotification()) {
-					setNotification(notification);
-				}
-			}
-		    return "config changed";
-		}
-	}; 
 
+	@Override
+	public IBinder onBind(Intent intent) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
