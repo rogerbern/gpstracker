@@ -11,7 +11,7 @@ import android.widget.TextView;
 /**
  * 
  * @author roger
- *
+ * @change marc - TableCreate auskommentiert 
  */
 public class TrackingListActivity extends BaseActivity {
 	private static String TRACKING_TITLE = "Name";
@@ -28,9 +28,9 @@ public class TrackingListActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tracking_list);
         
-        tl = (TableLayout) findViewById(R.id.tracking_table_tl);
-        addHeaders();
-        addData();
+        //tl = (TableLayout) findViewById(R.id.tracking_table_tl);
+        //addHeaders();
+        //addData();
     }
 	
 	@Override
