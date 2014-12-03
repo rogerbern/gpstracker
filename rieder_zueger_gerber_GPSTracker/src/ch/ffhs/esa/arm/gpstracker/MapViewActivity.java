@@ -27,7 +27,7 @@ public class MapViewActivity extends BaseActivity {
     }
 	
 	@Override
-	protected void onResume() {
+	public void onResume() {
 		super.onResume();
 		ArrayList<Location> locationList = new ArrayList<Location>();
 		// determine if a tracking id was transmitted on item start
@@ -35,7 +35,7 @@ public class MapViewActivity extends BaseActivity {
 		if (this.trackingId != null) {
 			locationList.addAll(LocationHelper.getLocationsForTracking(this.trackingId));
 		} else {
-			Location location = LocationHelper.getCurrentPosition();
+			Location location = LocationHelper.getCurrentPosition(this);
 			if (location != null) {
 				locationList.add(location);	
 			}  

@@ -6,6 +6,7 @@ import java.util.Set;
 import ch.ffhs.esa.arm.gpstracker.EditPreferences;
 
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
@@ -32,9 +33,8 @@ public class PhoneNumberHelper {
    * @return
    */
   public static String getUrgencyPhoneNumber(Context context) {
-  	  //SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
-	  preferences = context.getSharedPreferences(EditPreferences.SHARED_PREF_NAME, Context.MODE_MULTI_PROCESS);
-      return preferences.getString(URGENCY_PHONECALL_RECEIVER, "");
+    preferences = context.getSharedPreferences(EditPreferences.SHARED_PREF_NAME, Context.MODE_MULTI_PROCESS);
+    return preferences.getString(URGENCY_PHONECALL_RECEIVER, "");
   }
   
   /**

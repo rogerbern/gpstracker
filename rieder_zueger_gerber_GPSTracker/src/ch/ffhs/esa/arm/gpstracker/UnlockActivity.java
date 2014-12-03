@@ -28,7 +28,7 @@ public class UnlockActivity extends BaseActivity {
     }
     
     @Override
-    protected void onResume() {
+    public void onResume() {
       super.onResume();
     }
     
@@ -45,8 +45,9 @@ public class UnlockActivity extends BaseActivity {
 		passwordText = (EditText) findViewById(R.id.editText_password);
 		// determine if passwords are the same
 		if (password.equals(passwordText.getText().toString())) {
-			// TODO: if passwords match unlock menu
-			Navigation.getInstance(this).setLock(false);
+			// if passwords match unlock menu
+			NavigationComponent.setBooleanPreferencesValue(this, NavigationComponent.LOCK_SETTINGS_KEY, false);
+			//Navigation.getInstance(this).setLock(false);
 			// redirect to mainActivity
 			Intent intent = new Intent(this, MainActivity.class);
     		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

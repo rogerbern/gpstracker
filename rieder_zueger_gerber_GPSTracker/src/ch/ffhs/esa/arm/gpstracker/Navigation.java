@@ -92,7 +92,6 @@ public class Navigation extends Application {
   }
   
   private void setBooleanPreferencesValue(Activity activity, String key, boolean value) {
-	
 	SharedPreferences preferences = activity.getSharedPreferences(EditPreferences.SHARED_PREF_NAME, Context.MODE_MULTI_PROCESS);
     SharedPreferences.Editor editor = preferences.edit();
     editor.putBoolean(key, value);

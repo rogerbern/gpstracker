@@ -1,5 +1,7 @@
 package ch.ffhs.esa.arm.gpstracker;
 
+import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -25,12 +27,10 @@ public class TrackingNewActivity extends BaseActivity {
 	@Override
 	public void onResume() {
 	  super.onResume();
-	  // manipulate menu (do not show play, new, pause, stop, preferences)
-	  Navigation.getInstance(this).proecessNewTrackingActivityMenu();
 	  
 	  // load already stored preference values form the shared preferences and set them as
 	  // values in the input fields of the form
-      SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+      SharedPreferences preferences = getSharedPreferences(EditPreferences.SHARED_PREF_NAME, Context.MODE_MULTI_PROCESS);
         
       Spinner gpsIntervallSpinner = (Spinner) findViewById(R.id.intervall_selector);
       String trackingIntervall = preferences.getString("pref_key_gps_intervall", "5 min");
@@ -58,7 +58,7 @@ public class TrackingNewActivity extends BaseActivity {
 	
 	public void save(View view) {
 	  // load the preference manager in edit mode
-	  SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+	  SharedPreferences preferences = getSharedPreferences(EditPreferences.SHARED_PREF_NAME, Context.MODE_MULTI_PROCESS);
 	  SharedPreferences.Editor editor = preferences.edit();
 	  
 	  // load the form field values and store them in the appropriate preferences
@@ -88,9 +88,11 @@ public class TrackingNewActivity extends BaseActivity {
 		
 	  // commit the changes to persistence
 	  editor.commit();
-	  // initialize the navigation icons of the tracking controls
-	  Navigation.getInstance(this).setTrackingActive(true);
-	  Navigation.getInstance(this).setTrackingPlay(false);
-	  Navigation.getInstance(this).actionMainIntend(this);
+	  NavigationComponent.setBooleanPreferencesValue(this, NavigationComponent.TRACKING_ACTIVE_KEY, true);
+	  NavigationComponent.setBooleanPreferencesValue(this, NavigationComponent.TRACKING_PLAY_KEY, false);
+	  // redirect to main activity
+      Intent intent = new Intent(this, MainActivity.class);
+      intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+      startActivity(intent);
 	}
 }

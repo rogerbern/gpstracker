@@ -2,7 +2,10 @@ package ch.ffhs.esa.arm.gpstracker.utils;
 
 import java.util.List;
 
+import android.content.Context;
 import android.location.Location;
+import android.location.LocationManager;
+import android.util.Log;
 
 /**
  * Helper for location functionalities
@@ -10,6 +13,7 @@ import android.location.Location;
  *
  */
 public class LocationHelper {
+  private static final String LOG = "ch.ffhs.esa.arm.gpstracker.utils.LocationHelper"; 
   
   private LocationHelper() {
   }
@@ -20,9 +24,16 @@ public class LocationHelper {
    * returns null
    * @return
    */
-  public static Location getCurrentPosition() {
+  public static Location getCurrentPosition(Context context) {
 	  // TODO: try to get the actual GPS location from the device
-	  return null;
+	  LocationManager locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
+	  Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+	  if (location == null) {
+	    location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+	  }
+	  
+	  Log.e(LOG, "location: " + location);
+	  return location;
   }
   
   /**

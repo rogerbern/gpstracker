@@ -13,42 +13,41 @@ import android.widget.TextView;
  *
  */
 public class LockActivity extends BaseActivity {
-	private static final String PASSWORD = "pref_key_lock_pwd";
+  private static final String PASSWORD = "pref_key_lock_pwd";
 
-	@Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_lock);
-    }
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_lock);
+  }
     
-    @Override
-    protected void onResume() {
-    	super.onResume();
-    	// TODO: else not show a message,
-    	if (isPasswordSet()) {
-    		// lock navigation
-    		Navigation.getInstance(this).setLock(true);
-    		// redirect to main activity
-    		Intent intent = new Intent(this, MainActivity.class);
-    		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-    		startActivity(intent);
-    	} else {
-    		// messageText = (TextView) findViewById(R.id.lock_introduction_text);
-    	}
-    	
+  @Override
+  public void onResume() {
+    super.onResume();
+    // TODO: else not show a message,
+    if (isPasswordSet()) {
+      // lock navigation
+      NavigationComponent.setBooleanPreferencesValue(this, NavigationComponent.LOCK_SETTINGS_KEY, true);
+      // redirect to main activity
+      Intent intent = new Intent(this, MainActivity.class);
+      intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+      startActivity(intent);
+      } else {
+    	  // messageText = (TextView) findViewById(R.id.lock_introduction_text);
+      }
     }
     
 	@Override
 	protected void onStop() {
-		super.onStop();
+	  super.onStop();
 	}
 	
 	private boolean isPasswordSet() {
-		SharedPreferences preferences = getSharedPreferences(EditPreferences.SHARED_PREF_NAME, Context.MODE_MULTI_PROCESS);
-		String password = preferences.getString(PASSWORD, "");
-		if (password.isEmpty()) {
-			return false;
-		}
-		return true;
+	  SharedPreferences preferences = getSharedPreferences(EditPreferences.SHARED_PREF_NAME, Context.MODE_MULTI_PROCESS);
+	  String password = preferences.getString(PASSWORD, "");
+	  if (password.isEmpty()) {
+		return false;
+	  }
+	  return true;
 	}
 }

@@ -27,26 +27,26 @@ import android.widget.TextView;
  *
  */
 public class MainActivity extends BaseActivity {
-	private static final String LOG = "ch.ffhs.esa.arm.gpstracker.MainActivity";
-	private TextView menuItemUrgencySettingsText;
-	private Button menuItemUrgencyCallButton;
+  private static final String LOG = "ch.ffhs.esa.arm.gpstracker.MainActivity";
+  private TextView menuItemUrgencySettingsText;
+  private Button menuItemUrgencyCallButton;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-    }
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+  }
     
-    @Override
-    protected void onResume() {
-    	checkUrgencySettings();
-    	super.onResume();
-    }
+  @Override
+  public void onResume() {
+    checkUrgencySettings();
+    super.onResume();
+  }
     
-	@Override
-	protected void onStop() {
-		super.onStop();
-	}
+  @Override 
+  public void onStop() {
+	super.onStop();
+  }
     
     /**
      * Checks if urgency settings are made, if not it disables the 'urgencyCall' Button
@@ -78,7 +78,7 @@ public class MainActivity extends BaseActivity {
       Set<String> smsReceivers = PhoneNumberHelper.getUrgencySMSReceivers(this);
       // if there is at least one phone number returned, create a new SMSSender Thread
       if (!smsReceivers.isEmpty()) {
-        SMSSender smsSender = new SMSSender(smsReceivers, MessageType.URGENCY);
+        SMSSender smsSender = new SMSSender(smsReceivers, MessageType.URGENCY, this);
         smsSender.start();
       }
     	
