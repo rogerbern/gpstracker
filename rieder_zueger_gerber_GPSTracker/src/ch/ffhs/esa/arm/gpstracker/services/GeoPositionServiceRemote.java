@@ -40,9 +40,6 @@ public class GeoPositionServiceRemote extends Service {
 	
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
-	  // TODO: database connection for storing gps data
-	  
-	  preferences = getSharedPreferences(EditPreferences.SHARED_PREF_NAME, Context.MODE_MULTI_PROCESS);
 	  manage();
 	  return(START_STICKY);
 	}
@@ -54,7 +51,9 @@ public class GeoPositionServiceRemote extends Service {
 	  startForeground(1111, note);
 	  
 	  while (true) {
-		this.started = preferences.getBoolean("pref_key_tracking_active", false);
+		preferences = getSharedPreferences(EditPreferences.SHARED_PREF_NAME, Context.MODE_MULTI_PROCESS);
+		this.started = preferences.getBoolean("pref_key_tracking_play", false);
+		
 		Log.i(LOG, "started: " + this.started);
 		if (this.started) {
 		  Log.i(LOG, "tracking is active");

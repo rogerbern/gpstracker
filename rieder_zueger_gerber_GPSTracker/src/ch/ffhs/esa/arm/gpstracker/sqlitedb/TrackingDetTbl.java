@@ -1,5 +1,5 @@
 package ch.ffhs.esa.arm.gpstracker.sqlitedb;
-
+ 
 import java.sql.Date;
 import java.util.Calendar;
 
@@ -82,5 +82,17 @@ public class TrackingDetTbl implements TrackingDetColumns {
 		//values.put(FIELD_TRACKINGNAME, trackingName);
 		//return db.update(TABLE_TRACKING, values, FIELD_ID + "=" + id, null) > 0;
 		return false;
+	}
+	
+	public Cursor getMaxId() {
+		Cursor result = db.query(TABLE_TRACKING_DET, null, "TRACKING_DET_ID=(SELECT MAX(TRACKING_DET_ID) FROM TRACKING_DET_T)", null, null, null, null);
+		boolean found = result.moveToFirst();
+		if (found) {
+			return result;
+		}
+		else {
+			result.close();
+			return null;
+		}
 	}
 }

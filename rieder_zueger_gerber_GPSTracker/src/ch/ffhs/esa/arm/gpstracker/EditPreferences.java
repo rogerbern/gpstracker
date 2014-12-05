@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceManager;
 
-/**
+/** 
  * Preference Activity
  * Sets an application context for the preferences, so its accessible for background processes
  * @author roger

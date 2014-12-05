@@ -1,5 +1,5 @@
 package ch.ffhs.esa.arm.gpstracker.tests;
-
+ 
 import ch.ffhs.esa.arm.gpstracker.R;
 import ch.ffhs.esa.arm.gpstracker.TrackingItem;
 import ch.ffhs.esa.arm.gpstracker.TrackingListActivity;

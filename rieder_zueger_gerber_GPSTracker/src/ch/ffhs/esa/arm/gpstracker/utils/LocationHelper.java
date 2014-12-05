@@ -1,10 +1,12 @@
 package ch.ffhs.esa.arm.gpstracker.utils;
 
-import java.util.List;
+import ch.ffhs.esa.arm.gpstracker.EditPreferences;
+import ch.ffhs.esa.arm.gpstracker.TrackingPosition;
+import ch.ffhs.esa.arm.gpstracker.sqlitedb.TrackingDbLayer;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.location.Location;
-import android.location.LocationManager;
 import android.util.Log;
 
 /**
@@ -19,20 +21,16 @@ public class LocationHelper {
   }
   
   /**
-   * Tryies to get the current gps position from the device
+   * Tries to get the current gps position from the device
    * returns null, if the position returned from the location service 
    * returns null
    * @return
    */
   public static Location getCurrentPosition(Context context) {
 	  // TODO: try to get the actual GPS location from the device
-	  LocationManager locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
-	  Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-	  if (location == null) {
-	    location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-	  }
-	  
-	  Log.e(LOG, "location: " + location);
+	  GPSTracker gpsTracker = new GPSTracker(context);
+	  Location location = gpsTracker.getLocation();
+	  Log.d(LOG, "location: " + location);
 	  return location;
   }
   
@@ -42,14 +40,19 @@ public class LocationHelper {
    * is null
    * @return
    */
-  public static Location getLastPositionFromActiveTracking() {
-	  // TODO: determine if a trackin is active.
+  public static Location getLastPositionFromActiveTracking(Context context) {
+	Location location = null;
+	// determine if a trackin is active.
+	SharedPreferences preferences = context.getSharedPreferences(EditPreferences.SHARED_PREF_NAME, Context.MODE_MULTI_PROCESS);
+	boolean isTrackingActive = preferences.getBoolean("pref_key_tracking_active", false);
+	if (isTrackingActive) {
 	  // If so, load the last stored Location from the database
-	  return null;
-  }
-  
-  public static List<Location> getLocationsForTracking(long id) {
-    // TODO: load all location entries for this tracking id
-	return null;
+	  TrackingDbLayer trackingDbLayer = new TrackingDbLayer(context);
+	  TrackingPosition trackingPosition = trackingDbLayer.getNewestTrackingPosition();
+	  location = new Location("");
+	  location.setLatitude(trackingPosition.getLatitude());
+	  location.setLongitude(trackingPosition.getLongitude());
+	}
+	  return location;
   }
 }

@@ -1,6 +1,6 @@
 package ch.ffhs.esa.arm.gpstracker.utils;
 
-/**
+/** 
  * Enumeration for the message type of an position sms with text representation for sms text
  * In a multi language scenario the enum keys could be used to address a value in a text file
  * @author roger

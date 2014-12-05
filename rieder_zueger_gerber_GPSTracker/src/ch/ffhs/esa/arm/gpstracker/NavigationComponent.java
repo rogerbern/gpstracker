@@ -7,6 +7,11 @@ import android.content.SharedPreferences;
 import android.view.Menu;
 import android.view.MenuItem;
 
+/**
+ * Handles the application navigation.
+ * @author roger
+ *
+ */
 public class NavigationComponent {
   protected static final String TRACKING_ACTIVE_KEY = "pref_key_tracking_active";
   protected static final String TRACKING_PLAY_KEY = "pref_key_tracking_play";

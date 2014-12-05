@@ -1,5 +1,5 @@
 package ch.ffhs.esa.arm.gpstracker;
-
+ 
 import java.text.DateFormat;
 import android.app.Activity;
 import android.database.Cursor;
@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.widget.TextView;
 import ch.ffhs.esa.arm.gpstracker.sqlitedb.TrackingTbl;
 
-/**
+/** 
  * 
  * @author roger
  *

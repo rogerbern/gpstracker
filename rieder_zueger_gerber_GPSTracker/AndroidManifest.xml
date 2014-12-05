@@ -3,7 +3,7 @@
     package="ch.ffhs.esa.arm.gpstracker"
     android:versionCode="1"
     android:versionName="1.0" >
-
+ 
     <uses-sdk
         android:minSdkVersion="16"
         android:targetSdkVersion="22" />
@@ -101,6 +101,8 @@
 	    android:value="AIzaSyDHBPq_BddV58b5Q0vsyraYrjcIqPmiwu0"/>
         
         <uses-library android:name="android.test.runner" />
-        	   
+        
+        <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />
+        
     </application>
 </manifest>

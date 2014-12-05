@@ -1,6 +1,6 @@
 package ch.ffhs.esa.arm.gpstracker.sqlitedb;
-
-/**
+ 
+/** 
  * @author Marc
  * 
  * Interface TrackingDETColumns

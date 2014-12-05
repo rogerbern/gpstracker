@@ -1,8 +1,10 @@
 package ch.ffhs.esa.arm.gpstracker.sqlitedb;
-
+ 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
+import ch.ffhs.esa.arm.gpstracker.Tracking;
 import ch.ffhs.esa.arm.gpstracker.TrackingItem;
 import ch.ffhs.esa.arm.gpstracker.TrackingPosition;
 import android.content.Context;
@@ -103,10 +105,12 @@ public class TrackingDbLayer {
     	Cursor cursor = trackingDetTbl.getTrackingPosition(trackingItemId);
 		cursor.moveToFirst();
 		while (!cursor.isAfterLast()) {
-			
-			double latitud = Double.parseDouble(cursor.getString(2));
-			double longitude = Double.parseDouble(cursor.getString(3));
-	    	trackingPositions.add(new TrackingPosition(latitud, longitude));
+			long id = cursor.getLong(TrackingPosition.ID_POSITION);
+			long trackingId = cursor.getLong(TrackingPosition.TRACKING_ID_POSITION);
+			double latitude = Double.parseDouble(cursor.getString(TrackingPosition.LATITUDE_POSITION));
+			double longitude = Double.parseDouble(cursor.getString(TrackingPosition.LONGITUDE_POISITION));
+			Date trackingDate = new Date(cursor.getLong(TrackingPosition.TRACKING_DATE_POSITION));
+	    	trackingPositions.add(new TrackingPosition(id, trackingId, latitude, longitude, trackingDate));
 	    	
 	    	cursor.moveToNext();
 	    }
@@ -114,6 +118,42 @@ public class TrackingDbLayer {
 		trackingDetTbl.close();
 		
 		return trackingPositions;
+	}
+	
+	/**
+	 * Return a the latest stored tracking, the one with the highest id value.
+	 * @return newest Tracking
+	 */
+	public Tracking getNewestTracking() {
+	  trackingTbl.open();
+	  
+	  Cursor cursor = trackingTbl.getMaxId();
+	  cursor.moveToFirst();
+	  long id = cursor.getLong(Tracking.ID_POSITION);
+	  String name = cursor.getString(Tracking.NAME_POSITION);
+	  
+	  return new Tracking(id, name);
+	}
+	
+	/**
+	 * Return the latest stored trackingposition, the one with the highest id value.
+	 * @return
+	 */
+	public TrackingPosition getNewestTrackingPosition() {
+		TrackingPosition trackingPosition;
+		
+		trackingDetTbl.open();
+		
+		Cursor cursor = trackingDetTbl.getMaxId();
+		cursor.moveToFirst();
+		long id = cursor.getLong(TrackingPosition.ID_POSITION);
+		long trackingId = cursor.getLong(TrackingPosition.TRACKING_ID_POSITION);
+		double latitude = Double.parseDouble(cursor.getString(TrackingPosition.LATITUDE_POSITION));
+		double longitude = Double.parseDouble(cursor.getString(TrackingPosition.LONGITUDE_POISITION));
+		Date trackingDate = new Date(cursor.getLong(TrackingPosition.TRACKING_DATE_POSITION));
+    	trackingPosition = new TrackingPosition(id, trackingId, latitude, longitude, trackingDate);
+    	
+    	return trackingPosition;
 	}
 	
 	

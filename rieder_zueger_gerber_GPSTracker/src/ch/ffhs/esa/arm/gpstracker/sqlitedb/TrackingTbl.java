@@ -1,14 +1,12 @@
 package ch.ffhs.esa.arm.gpstracker.sqlitedb;
 
-import java.util.Date;
-
 import ch.ffhs.esa.arm.gpstracker.sqlitedb.DbHelper;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-/**
+/** 
  * @author Marc
  * 
  * Class TrackingTbl

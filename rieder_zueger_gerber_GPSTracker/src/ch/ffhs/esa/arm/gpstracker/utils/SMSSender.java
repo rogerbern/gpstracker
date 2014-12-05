@@ -55,12 +55,10 @@ public final class SMSSender extends Thread {
   
   private void handleUrgencyType() {
 	Location location;
-	// TODO: determine if gps is activated, if not stop here
-	// try to get actual position
 	location = LocationHelper.getCurrentPosition(this.context);
 	if (location == null) {
 	  // try to get last stored position
-	  location = LocationHelper.getLastPositionFromActiveTracking();
+	  location = LocationHelper.getLastPositionFromActiveTracking(this.context);
 	}
 	// if location is still null, try as many times to get a position from the device
 	// until one is returned:

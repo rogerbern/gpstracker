@@ -1,8 +1,11 @@
 package ch.ffhs.esa.arm.gpstracker;
 
+import java.text.DateFormat;
+import java.util.Date;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.View;
@@ -10,13 +13,20 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Switch;
+import ch.ffhs.esa.arm.gpstracker.sqlitedb.DbHelper;
+import ch.ffhs.esa.arm.gpstracker.sqlitedb.TrackingDbLayer;
+import ch.ffhs.esa.arm.gpstracker.sqlitedb.TrackingTbl;
+
 
 /**
  * Activity to configure a new tracking.
- * @author roger
+ * @author roger/marc
  *
  */
 public class TrackingNewActivity extends BaseActivity {
+	private static final DateFormat DATE_FORMAT = DateFormat.getDateInstance();
+	private TrackingTbl trackingTbl;
+	private SQLiteDatabase db;
 	
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +75,15 @@ public class TrackingNewActivity extends BaseActivity {
 	  EditText trackingName = (EditText) findViewById(R.id.editText_tracking_name);
 	  String trackingNameValue = trackingName.getEditableText().toString();
 	  editor.putString("pref_key_tracking_name", trackingNameValue);
+	  
+	  // Create/Open the Database
+	  TrackingDbLayer trackingDbLayer = new TrackingDbLayer(this);
+	  trackingDbLayer.insertTrackingItemWithoutPosition(new TrackingItem(trackingNameValue));
+	  
+      /* TODO: delete. trackingTbl = new TrackingTbl(this);
+	  trackingTbl.open();
+		
+	  long res = trackingTbl.insertTracking(trackingNameValue);*/
 		
 	  Spinner gpsIntervallSpinner = (Spinner) findViewById(R.id.intervall_selector);
       String gpsIntervallValue = (String) gpsIntervallSpinner.getSelectedItem();

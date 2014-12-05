@@ -10,5 +10,5 @@
 	    android:id="@+id/trakcing_ListView" 
 	    tools:listitem="@layout/tracking_list_item" />
 
-</RelativeLayout>
+</RelativeLayout> 
 

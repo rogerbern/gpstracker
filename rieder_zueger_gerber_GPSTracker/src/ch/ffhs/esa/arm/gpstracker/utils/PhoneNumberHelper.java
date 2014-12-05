@@ -10,7 +10,7 @@ import android.content.ContextWrapper;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
-/**
+/** 
  * Helper class for getting phone numbers or phone number lists of different classes
  * @author roger
  *

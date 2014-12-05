@@ -3,9 +3,15 @@ package ch.ffhs.esa.arm.gpstracker.services;
 import java.util.concurrent.Callable;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.location.Location;
 import android.util.Log;
 
+import ch.ffhs.esa.arm.gpstracker.Tracking;
+import ch.ffhs.esa.arm.gpstracker.TrackingPosition;
+import ch.ffhs.esa.arm.gpstracker.sqlitedb.DbHelper;
+import ch.ffhs.esa.arm.gpstracker.sqlitedb.TrackingDbLayer;
+import ch.ffhs.esa.arm.gpstracker.sqlitedb.TrackingTbl;
 import ch.ffhs.esa.arm.gpstracker.utils.LocationHelper;
 import ch.ffhs.esa.arm.gpstracker.utils.MessageType;
 import ch.ffhs.esa.arm.gpstracker.utils.PhoneNumberHelper;
@@ -27,7 +33,11 @@ public class PositionTask implements Callable {
 	Log.e(LOG, "Position retrieved: " + location);
 	if (location != null) {
 	  Log.e(LOG, "Position Service got location: long: " + location.getLongitude() + " , lat:" + location.getLatitude());
-	  // TODO: store Position in DB
+	  // store Position in DB
+	  TrackingDbLayer trackingDbLayer = new TrackingDbLayer(context);
+	  Tracking newestTracking = trackingDbLayer.getNewestTracking();
+	  trackingDbLayer.insertTrackingPosition(newestTracking.getTrackingId(), new TrackingPosition(location));
+
 	  if (notification) {
 		SMSSender smsSender = new SMSSender(PhoneNumberHelper.getTrackingSMSReceivers(context), MessageType.STATUS_UPDATE, location, context);
 		smsSender.start();

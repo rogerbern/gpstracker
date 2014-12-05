@@ -1,5 +1,5 @@
 package ch.ffhs.esa.arm.gpstracker.utils;
-
+ 
 import android.app.AlertDialog;
 import android.app.Service;
 import android.content.Context;
@@ -12,7 +12,11 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.provider.Settings;
 import android.util.Log;
- 
+/**
+ * 
+ * @author andreas
+ *
+ */
 public class GPSTracker extends Service implements LocationListener {
  
     private final Context mContext;
