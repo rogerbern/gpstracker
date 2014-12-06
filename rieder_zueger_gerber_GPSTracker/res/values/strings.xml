@@ -48,12 +48,37 @@
     <string name="pref_title_lock_pwd">Lock Password</string>
     <string name="pref_title_lock_pwd_retype">Retype Lock Password</string>
     
-    <string name="help_Introduction_text">Hier steht später mal was hilfreiches.</string>
-    
     <string name="lock_Introduction_text">Bitte setzten Sie erst das Passwort zum entsperren in den Einstellungen.</string>
     
     <string name="unlock_Introduction_text">Bitte geben Sie das Passwort zum entsperren ein.</string>
     <string name="unlock_password_label">Passwort</string>
     <string name="unlock_error_text">Das eingegebene Passwort ist nicht korrekt.</string>
+    
+    <string name="help_title_1">"Call-Help" Funktion</string>
+    <string name="help_title_2">Lock/Unlock Funktion</string>
+    <string name="help_title_3">Neues Tracking starten</string>
+    <string name="help_title_4">Tracking pausieren, stoppen</string>
+    <string name="help_title_5">Trackingliste</string>
+    <string name="help_title_6">Karte anzeigen</string>
 
+    <string name="help_txt_1">Bevor die Funktion "Call Help" gestartet werden kann, muss in den Einstellungen
+        					  eine Notfallnummer und eine Notfall-SMS-Nummer eingegeben werden.
+        					  Anschliessend ist die Funktion "Call Help" verfügbar. Wird diese aktiviert,
+        					  wird sofort ein Anruf zur gesicherten Notfall-Nummer getätigt. Zusätzlich wird eine SMS
+        					  an die Notfall-SMS-Nummer mit den aktuellen Koordinaten versendet.</string>
+    <string name="help_txt_2">Die Lock Funktion deaktiviert alle Funktionen der App, ausser der "Call Help"-
+        					  Funktion. Dafür muss zuerst ein Passwort vergeben werden, um den Lock wieder aufzuheben.
+        					  Sobald Lock aktiviert wurde, ist nur noch die "Call-Help"-Funktion verfügbar.
+        					  Mittels der Unlock-Funktion im Menü, kann der Lock wieder aufgehoben werden. Dafür muss aber das
+        					  definierte Passwort eingegeben werden.</string>
+    <string name="help_txt_3">Ein neues Tracking wird über den Menüeintrag "New Tracking" ausgelöst. Vor dem Start kann ein 
+        					  individueller Name vergeben werden, das Intervall in dem die Koordinaten gesichert werden sollen und
+        					  ,wenn gewünscht, die SMS-Empfänger. ACHTUNG: Je nach Anbieter können zusätzliche Kosten für
+        					  das versenden von SMS entstehen.</string>
+    <string name="help_txt_4">Ein aktives Tracking kann im Menü mittels der Pause-Taste pausiert, wieder aufgenommen und gestoppt werden.</string>
+    <string name="help_txt_5">Unter "Trackingliste" werden alle gesicherten Trackings aufgelistet. Diese können gelöscht werden oder über den Knopf in
+        					  der Karte eingesehen werden.</string>
+    <string name="help_txt_6">Die Karte zeigt eine gesicherte Trackingroute an, die in der Trackingliste ausgelesen wurde. Wird
+        					  die Karte direkt aufgerufen, wird der aktuelle Standort angezeigt.</string>
+    
 </resources>
