@@ -12,10 +12,10 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.provider.Settings;
 import android.util.Log;
+
 /**
- * 
  * @author andreas
- *
+ * From Internet: http://stackoverflow.com/questions/1513485/how-do-i-get-the-current-gps-location-programmatically-in-android
  */
 public class GPSTracker extends Service implements LocationListener {
  
