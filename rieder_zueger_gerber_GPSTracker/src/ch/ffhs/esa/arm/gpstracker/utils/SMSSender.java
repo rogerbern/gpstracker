@@ -1,5 +1,6 @@
 package ch.ffhs.esa.arm.gpstracker.utils;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import android.content.Context;
@@ -35,6 +36,13 @@ public final class SMSSender extends Thread {
   public SMSSender(Set<String> phoneNumbers, MessageType messageType, Location location, Context context) {
 	this(phoneNumbers, messageType, context);
 	this.location = location;
+  }
+  
+  public SMSSender(String phoneNumber, MessageType messageType, Context context) {
+	this.phoneNumbers = new HashSet<String>();
+	this.phoneNumbers.add(phoneNumber);
+	this.messageType = messageType;
+	this.context = context;
   }
 
   public void run() {

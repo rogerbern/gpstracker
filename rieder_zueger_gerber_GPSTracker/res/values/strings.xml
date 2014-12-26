@@ -28,6 +28,7 @@
     <string name="tracking_sms_receiver_3_title"></string>
     <string name="tracking_notificatin_activate">Activate Notification</string>
     <string name="saveButtonText">Save</string>
+    <string name="sendSMSButtonText">Send Password SMS</string>
     
     
     <string name="pref_urgency_settings_title">Urgency Settings</string>
@@ -53,6 +54,7 @@
     <string name="unlock_Introduction_text">Bitte geben Sie das Passwort zum entsperren ein.</string>
     <string name="unlock_password_label">Passwort</string>
     <string name="unlock_error_text">Das eingegebene Passwort ist nicht korrekt.</string>
+    <string name="password_sms_send_text">Das Password wurde per SMS verschickt.</string>
     
     <string name="help_title_1">"Call-Help" Funktion</string>
     <string name="help_title_2">Lock/Unlock Funktion</string>

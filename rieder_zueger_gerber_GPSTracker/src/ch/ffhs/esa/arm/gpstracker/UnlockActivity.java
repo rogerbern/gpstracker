@@ -1,6 +1,9 @@
 package ch.ffhs.esa.arm.gpstracker;
 
 import ch.ffhs.esa.arm.gpstracker.BaseActivity;
+import ch.ffhs.esa.arm.gpstracker.utils.MessageType;
+import ch.ffhs.esa.arm.gpstracker.utils.PhoneNumberHelper;
+import ch.ffhs.esa.arm.gpstracker.utils.SMSSender;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -17,6 +20,7 @@ import android.widget.TextView;
 public class UnlockActivity extends BaseActivity {
 	private static final String PASSWORD = "pref_key_lock_pwd";
 	private TextView errorText;
+	private TextView smsSendText;
 	private EditText passwordText;
 	
 	@Override
@@ -25,6 +29,8 @@ public class UnlockActivity extends BaseActivity {
         setContentView(R.layout.activity_unlock);
         errorText = (TextView) findViewById(R.id.unlock_error_text);
 		errorText.setVisibility(View.INVISIBLE);
+		smsSendText = (TextView) findViewById(R.id.password_sms_send_text);
+		smsSendText.setVisibility(View.INVISIBLE);
     }
     
     @Override
@@ -57,5 +63,12 @@ public class UnlockActivity extends BaseActivity {
 		  errorText = (TextView) findViewById(R.id.unlock_error_text);
 		  errorText.setVisibility(View.VISIBLE);
 		}
+	}
+	
+	public void sendPasswordSMS(View view) {
+		SMSSender smsSender = new SMSSender(PhoneNumberHelper.getUrgencyPhoneNumber(this), MessageType.PASSWORD, this);
+		smsSender.start();
+		smsSendText = (TextView) findViewById(R.id.password_sms_send_text);
+		smsSendText.setVisibility(View.VISIBLE);
 	}
 }

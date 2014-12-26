@@ -9,6 +9,12 @@
     tools:context="ch.ffhs.esa.arm.gpstracker.UnlockActivity" >
 
     <TextView
+        android:id="@+id/password_sms_send_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/password_sms_send_text" />
+    
+    <TextView
         android:id="@+id/unlock_error_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -49,5 +55,14 @@
         android:layout_below="@id/editText_password"
         android:onClick="enterPassword"
         android:text="@string/saveButtonText" />
+    
+    <Button
+        android:id="@+id/send_password_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editText_password"
+        android:layout_toRightOf="@id/unlock_save_button"
+        android:onClick="sendPasswordSMS"
+        android:text="@string/sendSMSButtonText" />
 
 </RelativeLayout>
