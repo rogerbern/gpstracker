@@ -6,7 +6,7 @@ import android.location.Location;
 
 /**
  * Model for a tracking position
- * @author who?, 
+ * @author andreas, 
  * @author roger: completed model
  *
  */

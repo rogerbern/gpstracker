@@ -11,6 +11,11 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+/**
+ * 
+ * @author andreas
+ */
+
 public class TrackingListAdapter extends ArrayAdapter<TrackingItem> {
 
 	private List<TrackingItem> items;

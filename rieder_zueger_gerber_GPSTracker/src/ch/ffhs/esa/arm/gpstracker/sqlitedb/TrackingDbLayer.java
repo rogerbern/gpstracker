@@ -10,6 +10,11 @@ import ch.ffhs.esa.arm.gpstracker.TrackingPosition;
 import android.content.Context;
 import android.database.Cursor;
 
+/**
+ * 
+ * @author andreas
+ */
+
 public class TrackingDbLayer {
 
 	TrackingTbl trackingTbl;
@@ -156,8 +161,6 @@ public class TrackingDbLayer {
     	return trackingPosition;
 	}
 	
-	
-	// Ugly because only used for testing.
 	public void ClearDB()
 	{
 		trackingTbl.open();

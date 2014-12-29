@@ -1,5 +1,11 @@
 package ch.ffhs.esa.arm.gpstracker;
   
+/** 
+ * Model for a tracking.
+ * @author andreas
+ *
+ */
+
 import java.util.Date;
 import java.util.List;
 
