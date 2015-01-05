@@ -51,13 +51,19 @@ public class MapViewActivity extends BaseActivity {
         	double[] latitudes = bundle.getDoubleArray(TrackingListActivity.LATITUDES);
         	double[] longitudes = bundle.getDoubleArray(TrackingListActivity.LONGITUDES);
         	
-        	showTrackingDataOnMap(latitudes, longitudes);
+        	if(latitudes.length > 0 && longitudes.length > 0)
+            {
+        		showTrackingDataOnMap(latitudes, longitudes);
+            }
+        	else
+    		{
+    			showCurrentPositionOnMap();
+    		}
         }
 		else
 		{
 			showCurrentPositionOnMap();
 		}
-
 	}
 	
 	/**
@@ -78,12 +84,11 @@ public class MapViewActivity extends BaseActivity {
     	{
             routePoints.add(new LatLng(latitudes[i], longitudes[i]));
         }
-        
-    	PolylineOptions rectOptions = new PolylineOptions().width(3).color(Color.RED);
-        Polyline route = map.addPolyline(rectOptions);
-        route.setPoints(routePoints);
-        LatLng lastPosition = new LatLng(latitudes[latitudes.length-1], longitudes[longitudes.length-1]);
-        showMap(lastPosition, "Last Position!");
+        	PolylineOptions rectOptions = new PolylineOptions().width(3).color(Color.RED);
+            Polyline route = map.addPolyline(rectOptions);
+            route.setPoints(routePoints);
+            LatLng lastPosition = new LatLng(latitudes[latitudes.length-1], longitudes[longitudes.length-1]);
+            showMap(lastPosition, "Last Position!");
 	}
 	
 	private void showCurrentPositionOnMap()
