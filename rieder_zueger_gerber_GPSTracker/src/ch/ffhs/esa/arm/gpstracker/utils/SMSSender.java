@@ -21,6 +21,7 @@ public final class SMSSender extends Thread {
   private MessageType messageType;
   private Location location;
   private Context context;
+  private String password;
   
   /**
    * Constructor
@@ -38,11 +39,12 @@ public final class SMSSender extends Thread {
 	this.location = location;
   }
   
-  public SMSSender(String phoneNumber, MessageType messageType, Context context) {
+  public SMSSender(String phoneNumber, MessageType messageType, Context context, String password) {
 	this.phoneNumbers = new HashSet<String>();
 	this.phoneNumbers.add(phoneNumber);
 	this.messageType = messageType;
 	this.context = context;
+	this.password = password;
   }
 
   public void run() {
@@ -58,7 +60,7 @@ public final class SMSSender extends Thread {
   
   private void handlePasswordType() {
 	// send sms without location data but with the current password
-	sendSMS(this.phoneNumbers.iterator().next(), this.messageType.getText()); 
+	sendSMS(this.phoneNumbers.iterator().next(), this.messageType.getText() + this.password); 
   }
   
   private void handleUrgencyType() {
