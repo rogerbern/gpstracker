@@ -45,8 +45,7 @@ public class UnlockActivity extends BaseActivity {
 	
 	public void enterPassword(View view) {
 		// getPassword from settings
-		SharedPreferences preferences = getSharedPreferences(EditPreferences.SHARED_PREF_NAME, Context.MODE_MULTI_PROCESS);
-		String password = preferences.getString(PASSWORD, "");
+		String password = getPasswordFromSettings();
 		// getPassword from user
 		passwordText = (EditText) findViewById(R.id.editText_password);
 		// determine if passwords are the same
@@ -66,9 +65,17 @@ public class UnlockActivity extends BaseActivity {
 	}
 	
 	public void sendPasswordSMS(View view) {
-		SMSSender smsSender = new SMSSender(PhoneNumberHelper.getUrgencyPhoneNumber(this), MessageType.PASSWORD, this);
+		// getPassword from settings
+		String password = getPasswordFromSettings();
+		SMSSender smsSender = new SMSSender(PhoneNumberHelper.getUrgencyPhoneNumber(this), MessageType.PASSWORD, this, password);
 		smsSender.start();
 		smsSendText = (TextView) findViewById(R.id.password_sms_send_text);
 		smsSendText.setVisibility(View.VISIBLE);
+	}
+	
+	private String getPasswordFromSettings() {
+		// getPassword from settings
+		SharedPreferences preferences = getSharedPreferences(EditPreferences.SHARED_PREF_NAME, Context.MODE_MULTI_PROCESS);
+		return preferences.getString(PASSWORD, "");	
 	}
 }
