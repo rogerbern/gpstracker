@@ -10,6 +10,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 import ch.ffhs.esa.arm.gpstracker.EditPreferences;
+import ch.ffhs.esa.arm.gpstracker.utils.GPSTracker;
 import android.R;
 import android.app.Notification;
 import android.app.Service;
@@ -32,10 +33,12 @@ public class GeoPositionServiceRemote extends Service {
 	private String intervall;
 	private boolean started;
 	private Date lastSaved;
+	private GPSTracker gPSTracker;
 	
 	@Override
 	public void onCreate() {
-	  super.onCreate();
+		gPSTracker = new GPSTracker(this);
+		super.onCreate();
 	}
 	
 	@Override
@@ -80,7 +83,7 @@ public class GeoPositionServiceRemote extends Service {
 			  ExecutorService executor = Executors.newSingleThreadExecutor();
 			  try {
 				Log.i(LOG, "starting position thread");
-				executor.invokeAll((Collection<? extends Callable<T>>) Arrays.asList(new PositionTask(preferences.getBoolean("pref_key_tracking_activate_notification", false), getApplicationContext())), new Date().getTime() + intervallTime, TimeUnit.MILLISECONDS);
+				executor.invokeAll((Collection<? extends Callable<T>>) Arrays.asList(new PositionTask(preferences.getBoolean("pref_key_tracking_activate_notification", false), this, gPSTracker)), new Date().getTime() + intervallTime, TimeUnit.MILLISECONDS);
 			} catch (InterruptedException e) {
 				Log.e(LOG, "GeoPositionoService PositionThread crashed");
 			} finally {

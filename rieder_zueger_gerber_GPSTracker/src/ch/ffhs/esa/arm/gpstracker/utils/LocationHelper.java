@@ -30,7 +30,7 @@ public class LocationHelper {
 	  // TODO: try to get the actual GPS location from the device
 	  GPSTracker gpsTracker = new GPSTracker(context);
 	  Location location = gpsTracker.getLocation();
-	  Log.d(LOG, "location: " + location);
+	  Log.e(LOG, "location: " + location);
 	  return location;
   }
   

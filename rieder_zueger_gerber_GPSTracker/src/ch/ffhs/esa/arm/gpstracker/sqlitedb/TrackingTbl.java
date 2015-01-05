@@ -45,7 +45,7 @@ public class TrackingTbl implements TrackingColumns {
 	}
 		
 	public Cursor getMaxId() {
-		Cursor result = db.query(TABLE_TRACKING, null, "TRACKING_ID=(SELECT MAX(TRACKING_ID) FROM TRACKING_T)", null, null, null, null);
+		Cursor result = db.query(TABLE_TRACKING, null, "TRACKING_ID=(SELECT MAX(TRACKING_ID) FROM " + TrackingTbl.TABLE_TRACKING + ")", null, null, null, null);
 		boolean found = result.moveToFirst();
 		if (found) {
 			return result;

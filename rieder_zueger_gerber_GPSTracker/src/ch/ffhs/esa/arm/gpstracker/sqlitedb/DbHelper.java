@@ -17,7 +17,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class DbHelper extends SQLiteOpenHelper {
 
 	private static final String DB_NAME = "TrackinLists";
-	private static final int DB_VERSION = 3;
+	private static final int DB_VERSION = 4;
 	
 	private static DbHelper sINSTANCE;
 	private static Object sLOCK = "";
